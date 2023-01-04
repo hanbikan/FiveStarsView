@@ -1,11 +1,13 @@
 package com.abit.fivestarsview
 
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Rect
 import android.util.AttributeSet
-import android.util.Log
+import android.view.MotionEvent
+import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -17,6 +19,7 @@ class FiveStarsView @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyle) {
 
     private var isAnimated = true
+    private var starRating = 0
 
     private val view = inflate(context, R.layout.layout_five_stars_view, this)
     private val layoutFront = view.findViewById<ConstraintLayout>(R.id.layout_front)
@@ -39,6 +42,8 @@ class FiveStarsView @JvmOverloads constructor(
     init {
         getAttrs(attrs)
         setListener()
+        // Note that View.clipBounds equals null in first
+        layoutFront.clipBounds = Rect(0, 0, layoutFront.width, layoutFront.height)
     }
 
     private fun getAttrs(attrs: AttributeSet?) {
@@ -60,6 +65,7 @@ class FiveStarsView @JvmOverloads constructor(
          * selectedStarsCount(two-way databinding)
          * changeable
          * isAnimated
+         * animatorDuration
          * starSrc?
          */
         isAnimated = a.getBoolean(R.styleable.FiveStarsView_isAnimated, isAnimated)
@@ -68,21 +74,50 @@ class FiveStarsView @JvmOverloads constructor(
     @SuppressLint("ClickableViewAccessibility")
     private fun setListener() {
         layoutBack.setOnTouchListener { v, event ->
-            val right = calculateRightXOfTouchedStar(event.rawX).toInt()
-            layoutFront.clipBounds = Rect(0, 0, right, v.height)
-            layoutFront.requestLayout()
+            when (event.action) {
+                MotionEvent.ACTION_MOVE -> {
+                    layoutFront.clipBounds = Rect(0, 0, event.x.toInt(), layoutFront.height)
+                    requestLayout()
+                }
+                MotionEvent.ACTION_UP -> {
+                    starRating = calculateStarRating(event.rawX)
+                    val prevRight = layoutFront.clipBounds.right
+                    val nextRight = getRightXByStarRating().toInt()
+                    if (prevRight != nextRight) {
+                        ValueAnimator.ofInt(prevRight, nextRight).apply {
+                            addUpdateListener { valueAnimator ->
+                                layoutFront.clipBounds = Rect(0, 0, valueAnimator.animatedValue as Int, layoutFront.height)
+                            }
+                            duration = 200
+                            start()
+                        }
+                    }
+                }
+            }
             true
         }
     }
 
-    private fun calculateRightXOfTouchedStar(rawX: Float): Float {
-        return when (rawX) {
-            in 0f..backStars[0].x -> backStars[0].x
-            in backStars[0].x..backStars[1].x -> backStars[0].x + backStars[0].width
-            in backStars[1].x..backStars[2].x -> backStars[1].x + backStars[1].width
-            in backStars[2].x..backStars[3].x -> backStars[2].x + backStars[2].width
-            in backStars[3].x..backStars[4].x -> backStars[3].x + backStars[3].width
-            else -> backStars[4].x + backStars[4].width
+    private fun calculateStarRating(rawX: Float): Int {
+        return if (rawX < backStars[0].midX()) 0
+        else if (rawX < backStars[1].midX()) 1
+        else if (rawX < backStars[2].midX()) 2
+        else if (rawX < backStars[3].midX()) 3
+        else if (rawX < backStars[4].midX()) 4
+        else 5
+    }
+
+    private fun getRightXByStarRating(): Float {
+        return when (starRating) {
+            0 -> backStars[0].x
+            1 -> backStars[0].rightX()
+            2 -> backStars[1].rightX()
+            3 -> backStars[2].rightX()
+            4 -> backStars[3].rightX()
+            else -> backStars[4].rightX()
         }
     }
+
+    private fun View.rightX() = x + width
+    private fun View.midX() = x + width/2
 }
