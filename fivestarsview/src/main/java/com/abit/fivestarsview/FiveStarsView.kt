@@ -68,8 +68,8 @@ class FiveStarsView @JvmOverloads constructor(
          * starSrc?
          * starRating
          */
-        isAnimated = a.getBoolean(R.styleable.FiveStarsView_isAnimated, isAnimated)
-        animatorDuration = a.getInt(R.styleable.FiveStarsView_animatorDuration, animatorDuration)
+        isAnimated = a.getBoolean(R.styleable.FiveStarsView_fiveStarsView_isAnimated, isAnimated)
+        animatorDuration = a.getInt(R.styleable.FiveStarsView_fiveStarsView_animatorDuration, animatorDuration)
     }
 
     @SuppressLint("ClickableViewAccessibility")
