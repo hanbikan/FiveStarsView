@@ -9,6 +9,7 @@
     <com.abit.fivestarsview.FiveStarsView
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        app:isAnimated="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

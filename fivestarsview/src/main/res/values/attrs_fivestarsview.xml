@@ -2,5 +2,6 @@
 <resources>
     <declare-styleable name="FiveStarsView">
         <attr name="isAnimated" format="boolean"/>
+        <attr name="animatorDuration" format="integer"/>
     </declare-styleable>
 </resources>

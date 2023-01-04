@@ -19,6 +19,7 @@ class FiveStarsView @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyle) {
 
     private var isAnimated = true
+    private var animatorDuration = 200
     private var starRating = 0
 
     private val view = inflate(context, R.layout.layout_five_stars_view, this)
@@ -64,37 +65,54 @@ class FiveStarsView @JvmOverloads constructor(
          * starMargin
          * selectedStarsCount(two-way databinding)
          * changeable
-         * isAnimated
-         * animatorDuration
          * starSrc?
+         * starRating
          */
         isAnimated = a.getBoolean(R.styleable.FiveStarsView_isAnimated, isAnimated)
+        animatorDuration = a.getInt(R.styleable.FiveStarsView_animatorDuration, animatorDuration)
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setListener() {
-        layoutBack.setOnTouchListener { v, event ->
-            when (event.action) {
-                MotionEvent.ACTION_MOVE -> {
-                    layoutFront.clipBounds = Rect(0, 0, event.x.toInt(), layoutFront.height)
-                    requestLayout()
-                }
-                MotionEvent.ACTION_UP -> {
-                    starRating = calculateStarRating(event.rawX)
-                    val prevRight = layoutFront.clipBounds.right
-                    val nextRight = getRightXByStarRating().toInt()
-                    if (prevRight != nextRight) {
-                        ValueAnimator.ofInt(prevRight, nextRight).apply {
-                            addUpdateListener { valueAnimator ->
-                                layoutFront.clipBounds = Rect(0, 0, valueAnimator.animatedValue as Int, layoutFront.height)
+        if (isAnimated) {
+            layoutBack.setOnTouchListener { v, event ->
+                when (event.action) {
+                    MotionEvent.ACTION_MOVE -> {
+                        layoutFront.clipBounds = Rect(0, 0, event.x.toInt(), layoutFront.height)
+                        requestLayout()
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        starRating = calculateStarRating(event.rawX)
+                        val prevRight = layoutFront.clipBounds.right
+                        val nextRight = getRightXByStarRating().toInt()
+                        if (prevRight != nextRight) {
+                            ValueAnimator.ofInt(prevRight, nextRight).apply {
+                                addUpdateListener { valueAnimator ->
+                                    layoutFront.clipBounds = Rect(0, 0, valueAnimator.animatedValue as Int, layoutFront.height)
+                                }
+                                duration = animatorDuration.toLong()
+                                start()
                             }
-                            duration = 200
-                            start()
                         }
                     }
                 }
+                true
             }
-            true
+        } else {
+            layoutBack.setOnTouchListener { v, event ->
+                when (event.action) {
+                    MotionEvent.ACTION_MOVE -> {
+                        starRating = calculateStarRating(event.rawX)
+                        val prevRight = layoutFront.clipBounds.right
+                        val nextRight = getRightXByStarRating().toInt()
+                        if (prevRight != nextRight) {
+                            layoutFront.clipBounds = Rect(0, 0, nextRight, layoutFront.height)
+                        }
+                        requestLayout()
+                    }
+                }
+                true
+            }
         }
     }
 
