@@ -10,5 +10,5 @@ class FiveStarsView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : FrameLayout(context, attrs, defStyle) {
 
-
+    private val view = inflate(context, R.layout.layout_five_stars_view, this)
 }
