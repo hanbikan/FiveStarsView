@@ -6,61 +6,61 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_back"
+        android:id="@+id/layout_outline"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_back_star1"
+            android:id="@+id/image_outline_star1"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/ic_baseline_star_outline_24"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/image_back_star2"
+            app:layout_constraintEnd_toStartOf="@id/image_outline_star2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_back_star2"
+            android:id="@+id/image_outline_star2"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/ic_baseline_star_outline_24"
-            app:layout_constraintStart_toEndOf="@id/image_back_star1"
-            app:layout_constraintEnd_toStartOf="@id/image_back_star3"
+            app:layout_constraintStart_toEndOf="@id/image_outline_star1"
+            app:layout_constraintEnd_toStartOf="@id/image_outline_star3"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_back_star3"
+            android:id="@+id/image_outline_star3"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/ic_baseline_star_outline_24"
-            app:layout_constraintStart_toEndOf="@id/image_back_star2"
-            app:layout_constraintEnd_toStartOf="@id/image_back_star4"
+            app:layout_constraintStart_toEndOf="@id/image_outline_star2"
+            app:layout_constraintEnd_toStartOf="@id/image_outline_star4"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_back_star4"
+            android:id="@+id/image_outline_star4"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/ic_baseline_star_outline_24"
-            app:layout_constraintStart_toEndOf="@id/image_back_star3"
-            app:layout_constraintEnd_toStartOf="@id/image_back_star5"
+            app:layout_constraintStart_toEndOf="@id/image_outline_star3"
+            app:layout_constraintEnd_toStartOf="@id/image_outline_star5"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_back_star5"
+            android:id="@+id/image_outline_star5"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/ic_baseline_star_outline_24"
-            app:layout_constraintStart_toEndOf="@id/image_back_star4"
+            app:layout_constraintStart_toEndOf="@id/image_outline_star4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -69,61 +69,61 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_front"
+        android:id="@+id/layout_filled"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_front_star1"
+            android:id="@+id/image_filled_star1"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/ic_baseline_star_24"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/image_front_star2"
+            app:layout_constraintEnd_toStartOf="@id/image_filled_star2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_front_star2"
+            android:id="@+id/image_filled_star2"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/ic_baseline_star_24"
-            app:layout_constraintStart_toEndOf="@id/image_front_star1"
-            app:layout_constraintEnd_toStartOf="@id/image_front_star3"
+            app:layout_constraintStart_toEndOf="@id/image_filled_star1"
+            app:layout_constraintEnd_toStartOf="@id/image_filled_star3"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_front_star3"
+            android:id="@+id/image_filled_star3"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/ic_baseline_star_24"
-            app:layout_constraintStart_toEndOf="@id/image_front_star2"
-            app:layout_constraintEnd_toStartOf="@id/image_front_star4"
+            app:layout_constraintStart_toEndOf="@id/image_filled_star2"
+            app:layout_constraintEnd_toStartOf="@id/image_filled_star4"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_front_star4"
+            android:id="@+id/image_filled_star4"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/ic_baseline_star_24"
-            app:layout_constraintStart_toEndOf="@id/image_front_star3"
-            app:layout_constraintEnd_toStartOf="@id/image_front_star5"
+            app:layout_constraintStart_toEndOf="@id/image_filled_star3"
+            app:layout_constraintEnd_toStartOf="@id/image_filled_star5"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_front_star5"
+            android:id="@+id/image_filled_star5"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/ic_baseline_star_24"
-            app:layout_constraintStart_toEndOf="@id/image_front_star4"
+            app:layout_constraintStart_toEndOf="@id/image_filled_star4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
