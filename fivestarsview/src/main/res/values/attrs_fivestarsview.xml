@@ -4,5 +4,6 @@
         <attr name="fiveStarsView_animatorDuration" format="integer"/>
         <attr name="fiveStarsView_starRating" format="integer"/>
         <attr name="fiveStarsView_starSize" format="dimension"/>
+        <attr name="fiveStarsView_starColor" format="color"/>
     </declare-styleable>
 </resources>

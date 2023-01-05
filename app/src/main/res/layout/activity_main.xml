@@ -13,6 +13,7 @@
         app:fiveStarsView_animatorDuration="500"
         app:fiveStarsView_starRating="3"
         app:fiveStarsView_starSize="30dp"
+        app:fiveStarsView_starColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

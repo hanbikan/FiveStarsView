@@ -89,6 +89,15 @@ class FiveStarsView @JvmOverloads constructor(
         }
     }
 
+    fun setStarColor(starColor: Int) {
+        frontStars.forEach {
+            it.setColorFilter(starColor)
+        }
+        backStars.forEach {
+            it.setColorFilter(starColor)
+        }
+    }
+
 
     private fun getAttrs(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.FiveStarsView)
@@ -102,8 +111,6 @@ class FiveStarsView @JvmOverloads constructor(
     private fun setTypeArray(a: TypedArray) {
         /**
          * TODO
-         * starBackgroundColor
-         * starColor
          * starMargin
          * changeable
          * starSrc?
@@ -112,6 +119,7 @@ class FiveStarsView @JvmOverloads constructor(
         animatorDuration = a.getInt(R.styleable.FiveStarsView_fiveStarsView_animatorDuration, animatorDuration)
         setStarRating(a.getInt(R.styleable.FiveStarsView_fiveStarsView_starRating, starRating))
         setStarSize(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starSize, DEFAULT))
+        setStarColor(a.getColor(R.styleable.FiveStarsView_fiveStarsView_starColor, DEFAULT))
     }
 
     @SuppressLint("ClickableViewAccessibility")
