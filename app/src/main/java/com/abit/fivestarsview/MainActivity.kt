@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         val fiveStarsView = findViewById<FiveStarsView>(R.id.five_stars_view)
         val testButton = findViewById<Button>(R.id.button_test)
         testButton.setOnClickListener {
-            fiveStarsView.setStarMargin(20)
+            fiveStarsView.setStarRating(-10f)
         }
     }
 }

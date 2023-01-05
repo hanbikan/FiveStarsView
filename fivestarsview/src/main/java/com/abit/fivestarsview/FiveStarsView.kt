@@ -12,8 +12,12 @@ import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.doOnLayout
+import java.lang.Float.max
+import java.lang.Float.min
 
 private const val DEFAULT = -1
+private const val MIN_STAR_RATING = 0f
+private const val MAX_STAR_RATING = 5f
 
 class FiveStarsView @JvmOverloads constructor(
     context: Context,
@@ -21,7 +25,7 @@ class FiveStarsView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : FrameLayout(context, attrs, defStyle) {
 
-    private var starRating = 0
+    private var starRating = 0.0f
 
     private val view = inflate(context, R.layout.layout_five_stars_view, this)
     private val layoutFront = view.findViewById<ConstraintLayout>(R.id.layout_front)
@@ -47,30 +51,21 @@ class FiveStarsView @JvmOverloads constructor(
     }
 
 
-    fun setStarRating(newStarRating: Int) {
-        if (starRating != newStarRating) {
-            starRating = newStarRating
+    fun setStarRating(newStarRating: Float) {
+        val starRatingInRange = max(min(newStarRating, MAX_STAR_RATING), MIN_STAR_RATING)
+        if (starRating != starRatingInRange) {
+            starRating = starRatingInRange
 
             backStars.last().doOnLayout {
                 layoutFront.doOnLayout {
-                    val nextRight = getRightXByStarRating().toInt()
-                    layoutFront.clipBounds = Rect(0, 0, nextRight, layoutFront.height)
+                    val right = (backStars[0].x + backStars[4].rightX()) * (starRating / MAX_STAR_RATING)
+                    layoutFront.clipBounds = Rect(0, 0, right.toInt(), layoutFront.height)
                     layoutFront.requestLayout()
                 }
             }
         }
     }
 
-    private fun getRightXByStarRating(): Float {
-        return when (starRating) {
-            0 -> backStars[0].x
-            1 -> backStars[0].rightX()
-            2 -> backStars[1].rightX()
-            3 -> backStars[2].rightX()
-            4 -> backStars[3].rightX()
-            else -> backStars[4].rightX()
-        }
-    }
 
     fun getStarRating() = starRating
 
@@ -127,12 +122,11 @@ class FiveStarsView @JvmOverloads constructor(
     private fun setTypeArray(a: TypedArray) {
         /**
          * TODO
-         * starMargin
          * changeable
          * starSrc?
-         * starRating
+         * starRating: two-way databinding
          */
-        setStarRating(a.getInt(R.styleable.FiveStarsView_fiveStarsView_starRating, starRating))
+        setStarRating(a.getFloat(R.styleable.FiveStarsView_fiveStarsView_starRating, starRating))
         setStarSize(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starSize, DEFAULT))
         setStarColor(a.getColor(R.styleable.FiveStarsView_fiveStarsView_starColor, DEFAULT))
         setStarMargin(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starMargin, 0))
@@ -150,13 +144,13 @@ class FiveStarsView @JvmOverloads constructor(
         }
     }
 
-    private fun calculateStarRating(rawX: Float): Int {
-        return if (rawX < backStars[0].midX()) 0
-        else if (rawX < backStars[1].midX()) 1
-        else if (rawX < backStars[2].midX()) 2
-        else if (rawX < backStars[3].midX()) 3
-        else if (rawX < backStars[4].midX()) 4
-        else 5
+    private fun calculateStarRating(rawX: Float): Float {
+        return if (rawX < backStars[0].midX()) 0f
+        else if (rawX < backStars[1].midX()) 1f
+        else if (rawX < backStars[2].midX()) 2f
+        else if (rawX < backStars[3].midX()) 3f
+        else if (rawX < backStars[4].midX()) 4f
+        else 5f
     }
 
     private fun View.rightX() = x + width
