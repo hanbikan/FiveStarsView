@@ -12,7 +12,8 @@ import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.doOnLayout
-import androidx.core.view.doOnPreDraw
+
+private const val DEFAULT = -1
 
 class FiveStarsView @JvmOverloads constructor(
     context: Context,
@@ -48,7 +49,6 @@ class FiveStarsView @JvmOverloads constructor(
 
 
     fun setStarRating(newStarRating: Int) {
-        Log.e(starRating.toString(), newStarRating.toString())
         if (starRating != newStarRating) {
             starRating = newStarRating
 
@@ -62,7 +62,32 @@ class FiveStarsView @JvmOverloads constructor(
         }
     }
 
+    private fun getRightXByStarRating(): Float {
+        return when (starRating) {
+            0 -> backStars[0].x
+            1 -> backStars[0].rightX()
+            2 -> backStars[1].rightX()
+            3 -> backStars[2].rightX()
+            4 -> backStars[3].rightX()
+            else -> backStars[4].rightX()
+        }
+    }
+
     fun getStarRating() = starRating
+
+    /**
+     * @param starSize A size of stars in pixel
+     */
+    fun setStarSize(starSize: Int) {
+        if (starSize != DEFAULT) {
+            frontStars.forEach {
+                it.layoutParams = it.layoutParams.apply { width = starSize }
+            }
+            backStars.forEach {
+                it.layoutParams = it.layoutParams.apply { width = starSize }
+            }
+        }
+    }
 
 
     private fun getAttrs(attrs: AttributeSet?) {
@@ -77,7 +102,6 @@ class FiveStarsView @JvmOverloads constructor(
     private fun setTypeArray(a: TypedArray) {
         /**
          * TODO
-         * starSize
          * starBackgroundColor
          * starColor
          * starMargin
@@ -87,6 +111,7 @@ class FiveStarsView @JvmOverloads constructor(
          */
         animatorDuration = a.getInt(R.styleable.FiveStarsView_fiveStarsView_animatorDuration, animatorDuration)
         setStarRating(a.getInt(R.styleable.FiveStarsView_fiveStarsView_starRating, starRating))
+        setStarSize(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starSize, DEFAULT))
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -108,17 +133,6 @@ class FiveStarsView @JvmOverloads constructor(
         else if (rawX < backStars[3].midX()) 3
         else if (rawX < backStars[4].midX()) 4
         else 5
-    }
-
-    private fun getRightXByStarRating(): Float {
-        return when (starRating) {
-            0 -> backStars[0].x
-            1 -> backStars[0].rightX()
-            2 -> backStars[1].rightX()
-            3 -> backStars[2].rightX()
-            4 -> backStars[3].rightX()
-            else -> backStars[4].rightX()
-        }
     }
 
     private fun View.rightX() = x + width

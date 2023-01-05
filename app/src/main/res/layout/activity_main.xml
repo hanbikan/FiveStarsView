@@ -7,13 +7,22 @@
     tools:context=".MainActivity">
 
     <com.abit.fivestarsview.FiveStarsView
+        android:id="@+id/five_stars_view"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         app:fiveStarsView_animatorDuration="500"
         app:fiveStarsView_starRating="3"
+        app:fiveStarsView_starSize="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <Button
+        android:id="@+id/button_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
