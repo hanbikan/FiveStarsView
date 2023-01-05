@@ -90,11 +90,13 @@ class FiveStarsView @JvmOverloads constructor(
     }
 
     fun setStarColor(starColor: Int) {
-        frontStars.forEach {
-            it.setColorFilter(starColor)
-        }
-        backStars.forEach {
-            it.setColorFilter(starColor)
+        if (starColor != DEFAULT) {
+            frontStars.forEach {
+                it.setColorFilter(starColor)
+            }
+            backStars.forEach {
+                it.setColorFilter(starColor)
+            }
         }
     }
 
