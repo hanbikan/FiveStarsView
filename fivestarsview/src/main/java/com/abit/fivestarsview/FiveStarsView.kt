@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Rect
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -29,6 +30,8 @@ class FiveStarsView @JvmOverloads constructor(
     private var starColor = DEFAULT
     private var starMargin = 0
     private var changeable = true
+    private var filledStarDrawable: Drawable? = null
+    private var outlineStarDrawable: Drawable? = null
 
     private val view = inflate(context, R.layout.layout_five_stars_view, this)
     private val filledLayout = view.findViewById<ConstraintLayout>(R.id.layout_filled)
@@ -53,22 +56,22 @@ class FiveStarsView @JvmOverloads constructor(
     }
 
 
+    fun getStarRating() = starRating
+
     fun setStarRating(newStarRating: Float) {
         val starRatingInRange = max(min(newStarRating, MAX_STAR_RATING), MIN_STAR_RATING)
-        if (starRating != starRatingInRange) {
-            starRating = starRatingInRange
+        starRating = starRatingInRange
 
-            outlineStars.last().doOnLayout {
-                filledLayout.doOnLayout {
-                    val right = (outlineStars[0].x + outlineStars[4].rightX()) * (starRating / MAX_STAR_RATING)
-                    filledLayout.clipBounds = Rect(0, 0, right.toInt(), filledLayout.height)
-                    filledLayout.requestLayout()
-                }
+        outlineStars.last().doOnLayout {
+            filledLayout.doOnLayout {
+                val right = (outlineStars[0].x + outlineStars[4].rightX()) * (starRating / MAX_STAR_RATING)
+                filledLayout.clipBounds = Rect(0, 0, right.toInt(), filledLayout.height)
+                filledLayout.requestLayout()
             }
         }
     }
 
-    fun getStarRating() = starRating
+    fun getStarSize() = starSize
 
     fun setStarSize(size: Int) {
         starSize = size
@@ -82,7 +85,7 @@ class FiveStarsView @JvmOverloads constructor(
         }
     }
 
-    fun getStarSize() = starSize
+    fun getStarColor() = starColor
 
     fun setStarColor(color: Int) {
         starColor = color
@@ -96,7 +99,7 @@ class FiveStarsView @JvmOverloads constructor(
         }
     }
 
-    fun getStarColor() = starColor
+    fun getStarMargin() = starMargin
 
     fun setStarMargin(margin: Int) {
         starMargin = margin
@@ -114,7 +117,7 @@ class FiveStarsView @JvmOverloads constructor(
         }
     }
 
-    fun getStarMargin() = starMargin
+    fun getChangeable() = changeable
 
     @SuppressLint("ClickableViewAccessibility")
     fun setChangeable(flag: Boolean) {
@@ -131,7 +134,27 @@ class FiveStarsView @JvmOverloads constructor(
         }
     }
 
-    fun getChangeable() = changeable
+    fun getFilledStarDrawable() = filledStarDrawable
+
+    fun setFilledStarDrawable(drawable: Drawable?) {
+        filledStarDrawable = drawable
+        if (drawable != null) {
+            filledStars.forEach {
+                it.setImageDrawable(drawable)
+            }
+        }
+    }
+
+    fun getOutlineStarDrawable() = outlineStarDrawable
+
+    fun setOutlineStarDrawable(drawable: Drawable?) {
+        outlineStarDrawable = drawable
+        if (drawable != null) {
+            outlineStars.forEach {
+                it.setImageDrawable(drawable)
+            }
+        }
+    }
 
 
     private fun getAttrs(attrs: AttributeSet?) {
@@ -146,7 +169,6 @@ class FiveStarsView @JvmOverloads constructor(
     private fun setTypeArray(a: TypedArray) {
         /**
          * TODO
-         * starSrc?
          * starRating: two-way databinding
          */
         setStarRating(a.getFloat(R.styleable.FiveStarsView_fiveStarsView_starRating, starRating))
@@ -154,6 +176,8 @@ class FiveStarsView @JvmOverloads constructor(
         setStarColor(a.getColor(R.styleable.FiveStarsView_fiveStarsView_starColor, starColor))
         setStarMargin(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starMargin, starMargin))
         setChangeable(a.getBoolean(R.styleable.FiveStarsView_fiveStarsView_changeable, changeable))
+        setFilledStarDrawable(a.getDrawable(R.styleable.FiveStarsView_fiveStarsView_filledStar))
+        setOutlineStarDrawable(a.getDrawable(R.styleable.FiveStarsView_fiveStarsView_outlineStar))
     }
 
     private fun calculateStarRating(rawX: Float): Float {

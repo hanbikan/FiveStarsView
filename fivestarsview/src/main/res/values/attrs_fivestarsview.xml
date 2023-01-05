@@ -6,5 +6,7 @@
         <attr name="fiveStarsView_starColor" format="color"/>
         <attr name="fiveStarsView_starMargin" format="dimension"/>
         <attr name="fiveStarsView_changeable" format="boolean"/>
+        <attr name="fiveStarsView_filledStar" format="reference"/>
+        <attr name="fiveStarsView_outlineStar" format="reference"/>
     </declare-styleable>
 </resources>

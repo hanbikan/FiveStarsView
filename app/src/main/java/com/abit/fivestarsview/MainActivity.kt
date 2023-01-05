@@ -12,7 +12,8 @@ class MainActivity : AppCompatActivity() {
         val fiveStarsView = findViewById<FiveStarsView>(R.id.five_stars_view)
         val testButton = findViewById<Button>(R.id.button_test)
         testButton.setOnClickListener {
-            fiveStarsView.setChangeable(true)
+            fiveStarsView.setFilledStarDrawable(getDrawable(R.drawable.ic_baseline_favorite_24))
+            fiveStarsView.setOutlineStarDrawable(getDrawable(R.drawable.ic_baseline_favorite_border_24))
         }
     }
 }
