@@ -26,6 +26,7 @@ class FiveStarsView @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyle) {
 
     private var starRating = 0.0f
+    private var changeable = true
 
     private val view = inflate(context, R.layout.layout_five_stars_view, this)
     private val layoutFront = view.findViewById<ConstraintLayout>(R.id.layout_front)
@@ -47,7 +48,6 @@ class FiveStarsView @JvmOverloads constructor(
 
     init {
         getAttrs(attrs)
-        setListener()
     }
 
 
@@ -66,12 +66,8 @@ class FiveStarsView @JvmOverloads constructor(
         }
     }
 
-
     fun getStarRating() = starRating
 
-    /**
-     * @param starSize A size of stars in pixel
-     */
     fun setStarSize(size: Int) {
         if (size != DEFAULT) {
             frontStars.forEach {
@@ -109,6 +105,22 @@ class FiveStarsView @JvmOverloads constructor(
         }
     }
 
+    fun setChangeable(flag: Boolean) {
+        changeable = flag
+        if (changeable) {
+            layoutBack.setOnTouchListener { v, event ->
+                when (event.action) {
+                    MotionEvent.ACTION_MOVE -> {
+                        setStarRating(calculateStarRating(event.rawX))
+                    }
+                }
+                true
+            }
+        }
+    }
+
+    fun getChangeable() = changeable
+
 
     private fun getAttrs(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.FiveStarsView)
@@ -130,18 +142,7 @@ class FiveStarsView @JvmOverloads constructor(
         setStarSize(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starSize, DEFAULT))
         setStarColor(a.getColor(R.styleable.FiveStarsView_fiveStarsView_starColor, DEFAULT))
         setStarMargin(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starMargin, 0))
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    private fun setListener() {
-        layoutBack.setOnTouchListener { v, event ->
-            when (event.action) {
-                MotionEvent.ACTION_MOVE -> {
-                    setStarRating(calculateStarRating(event.rawX))
-                }
-            }
-            true
-        }
+        setChangeable(a.getBoolean(R.styleable.FiveStarsView_fiveStarsView_changeable, changeable))
     }
 
     private fun calculateStarRating(rawX: Float): Float {
