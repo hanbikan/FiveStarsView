@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="FiveStarsView">
-        <attr name="fiveStarsView_animatorDuration" format="integer"/>
         <attr name="fiveStarsView_starRating" format="integer"/>
         <attr name="fiveStarsView_starSize" format="dimension"/>
         <attr name="fiveStarsView_starColor" format="color"/>
+        <attr name="fiveStarsView_starMargin" format="dimension"/>
     </declare-styleable>
 </resources>

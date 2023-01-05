@@ -21,7 +21,6 @@ class FiveStarsView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : FrameLayout(context, attrs, defStyle) {
 
-    private var animatorDuration = 200
     private var starRating = 0
 
     private val view = inflate(context, R.layout.layout_five_stars_view, this)
@@ -78,24 +77,39 @@ class FiveStarsView @JvmOverloads constructor(
     /**
      * @param starSize A size of stars in pixel
      */
-    fun setStarSize(starSize: Int) {
-        if (starSize != DEFAULT) {
+    fun setStarSize(size: Int) {
+        if (size != DEFAULT) {
             frontStars.forEach {
-                it.layoutParams = it.layoutParams.apply { width = starSize }
+                it.layoutParams = it.layoutParams.apply { width = size }
             }
             backStars.forEach {
-                it.layoutParams = it.layoutParams.apply { width = starSize }
+                it.layoutParams = it.layoutParams.apply { width = size }
             }
         }
     }
 
-    fun setStarColor(starColor: Int) {
-        if (starColor != DEFAULT) {
+    fun setStarColor(color: Int) {
+        if (color != DEFAULT) {
             frontStars.forEach {
-                it.setColorFilter(starColor)
+                it.setColorFilter(color)
             }
             backStars.forEach {
-                it.setColorFilter(starColor)
+                it.setColorFilter(color)
+            }
+        }
+    }
+
+    fun setStarMargin(margin: Int) {
+        frontStars.forEach {
+            it.layoutParams = (it.layoutParams as MarginLayoutParams).apply {
+                marginStart = margin / 2
+                marginEnd = margin / 2
+            }
+        }
+        backStars.forEach {
+            it.layoutParams = (it.layoutParams as MarginLayoutParams).apply {
+                marginStart = margin / 2
+                marginEnd = margin / 2
             }
         }
     }
@@ -118,10 +132,10 @@ class FiveStarsView @JvmOverloads constructor(
          * starSrc?
          * starRating
          */
-        animatorDuration = a.getInt(R.styleable.FiveStarsView_fiveStarsView_animatorDuration, animatorDuration)
         setStarRating(a.getInt(R.styleable.FiveStarsView_fiveStarsView_starRating, starRating))
         setStarSize(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starSize, DEFAULT))
         setStarColor(a.getColor(R.styleable.FiveStarsView_fiveStarsView_starColor, DEFAULT))
+        setStarMargin(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starMargin, 0))
     }
 
     @SuppressLint("ClickableViewAccessibility")
