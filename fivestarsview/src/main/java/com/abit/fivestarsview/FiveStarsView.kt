@@ -26,6 +26,9 @@ class FiveStarsView @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyle) {
 
     private var starRating = 0.0f
+    private var starSize = DEFAULT
+    private var starColor = DEFAULT
+    private var starMargin = 0
     private var changeable = true
 
     private val view = inflate(context, R.layout.layout_five_stars_view, this)
@@ -69,42 +72,52 @@ class FiveStarsView @JvmOverloads constructor(
     fun getStarRating() = starRating
 
     fun setStarSize(size: Int) {
-        if (size != DEFAULT) {
+        starSize = size
+        if (starSize != DEFAULT) {
             frontStars.forEach {
-                it.layoutParams = it.layoutParams.apply { width = size }
+                it.layoutParams = it.layoutParams.apply { width = starSize }
             }
             backStars.forEach {
-                it.layoutParams = it.layoutParams.apply { width = size }
+                it.layoutParams = it.layoutParams.apply { width = starSize }
             }
         }
     }
+
+    fun getStarSize() = starSize
 
     fun setStarColor(color: Int) {
-        if (color != DEFAULT) {
+        starColor = color
+        if (starColor != DEFAULT) {
             frontStars.forEach {
-                it.setColorFilter(color)
+                it.setColorFilter(starColor)
             }
             backStars.forEach {
-                it.setColorFilter(color)
+                it.setColorFilter(starColor)
             }
         }
     }
 
+    fun getStarColor() = starColor
+
     fun setStarMargin(margin: Int) {
+        starMargin = margin
         frontStars.forEach {
             it.layoutParams = (it.layoutParams as MarginLayoutParams).apply {
-                marginStart = margin / 2
-                marginEnd = margin / 2
+                marginStart = starMargin / 2
+                marginEnd = starMargin / 2
             }
         }
         backStars.forEach {
             it.layoutParams = (it.layoutParams as MarginLayoutParams).apply {
-                marginStart = margin / 2
-                marginEnd = margin / 2
+                marginStart = starMargin / 2
+                marginEnd = starMargin / 2
             }
         }
     }
 
+    fun getStarMargin() = starMargin
+
+    @SuppressLint("ClickableViewAccessibility")
     fun setChangeable(flag: Boolean) {
         changeable = flag
         if (changeable) {
@@ -139,9 +152,9 @@ class FiveStarsView @JvmOverloads constructor(
          * starRating: two-way databinding
          */
         setStarRating(a.getFloat(R.styleable.FiveStarsView_fiveStarsView_starRating, starRating))
-        setStarSize(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starSize, DEFAULT))
-        setStarColor(a.getColor(R.styleable.FiveStarsView_fiveStarsView_starColor, DEFAULT))
-        setStarMargin(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starMargin, 0))
+        setStarSize(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starSize, starSize))
+        setStarColor(a.getColor(R.styleable.FiveStarsView_fiveStarsView_starColor, starColor))
+        setStarMargin(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starMargin, starMargin))
         setChangeable(a.getBoolean(R.styleable.FiveStarsView_fiveStarsView_changeable, changeable))
     }
 
