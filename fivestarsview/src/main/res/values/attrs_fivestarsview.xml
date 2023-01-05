@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="FiveStarsView">
-        <attr name="fiveStarsView_isAnimated" format="boolean"/>
         <attr name="fiveStarsView_animatorDuration" format="integer"/>
+        <attr name="fiveStarsView_starRating" format="integer"/>
     </declare-styleable>
 </resources>
