@@ -33,6 +33,8 @@ class FiveStarsView @JvmOverloads constructor(
     private var filledStarDrawable: Drawable? = null
     private var outlineStarDrawable: Drawable? = null
 
+    private var onChangeStarRatingListeners: MutableList<OnChangeStarRatingListener> = mutableListOf()
+
     private val view = inflate(context, R.layout.layout_five_stars_view, this)
     private val filledLayout = view.findViewById<ConstraintLayout>(R.id.layout_filled)
     private val filledStars: List<AppCompatImageView> = listOf(
@@ -69,6 +71,8 @@ class FiveStarsView @JvmOverloads constructor(
                 filledLayout.requestLayout()
             }
         }
+
+        onChangeStarRatingListeners.forEach { it.onChange() }
     }
 
     fun getStarSize() = starSize
@@ -156,6 +160,10 @@ class FiveStarsView @JvmOverloads constructor(
         }
     }
 
+    fun addOnChangeStarRatingListener(listener: OnChangeStarRatingListener) {
+        onChangeStarRatingListeners.add(listener)
+    }
+
 
     private fun getAttrs(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.FiveStarsView)
@@ -167,10 +175,6 @@ class FiveStarsView @JvmOverloads constructor(
     }
 
     private fun setTypeArray(a: TypedArray) {
-        /**
-         * TODO
-         * starRating: two-way databinding
-         */
         setStarRating(a.getFloat(R.styleable.FiveStarsView_fiveStarsView_starRating, starRating))
         setStarSize(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starSize, starSize))
         setStarColor(a.getColor(R.styleable.FiveStarsView_fiveStarsView_starColor, starColor))
@@ -191,4 +195,12 @@ class FiveStarsView @JvmOverloads constructor(
 
     private fun View.rightX() = x + width
     private fun View.midX() = x + width/2
+
+
+    interface OnChangeStarRatingListener {
+        /**
+         * Called when [starRating] changes.
+         */
+        fun onChange()
+    }
 }
