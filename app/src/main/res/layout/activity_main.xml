@@ -3,36 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="vm"
-            type="com.abit.fivestarsview.MainViewModel" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".ui.MainActivity">
 
-        <com.abit.fivestarsview.FiveStarsView
-            android:id="@+id/five_stars_view"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            starRating="@={vm.starRating}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{vm.starRating.toString()}"
-            app:layout_constraintTop_toBottomOf="@id/five_stars_view"
-            app:layout_constraintStart_toStartOf="@id/five_stars_view"
-            app:layout_constraintEnd_toEndOf="@id/five_stars_view"
-            tools:text="1.7"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_home"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
