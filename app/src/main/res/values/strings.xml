@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FiveStarsView</string>
+    <string name="leave_a_review">Leave a review</string>
+    <string name="submit">Submit</string>
 </resources>

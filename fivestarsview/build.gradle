@@ -31,6 +31,7 @@ android {
     dataBinding {
         enabled = true
     }
+    namespace 'com.abit.fivestarsview'
 }
 
 dependencies {
