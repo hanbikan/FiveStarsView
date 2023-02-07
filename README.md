@@ -9,8 +9,9 @@
 <p align="center">⭐️ A simple and flexible FiveStarsView, whose star images, color, size, and the like are customizable.</p>
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/58168528/217139421-eacb999d-9597-488b-a336-99cd6630d137.gif" width="300px"/>
+  <img src="https://user-images.githubusercontent.com/58168528/217256711-3511c0a6-f099-4058-99ee-70bb4379f17c.gif" width="300px"/>
 </p>
+
 
 ## Usage
 Add following XML namespace inside your XML layout file.
