@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">FiveStarsView</string>
     <string name="leave_a_review">Leave a review</string>
+    <string name="star_rating_in_parentheses">(%.1f)</string>
     <string name="submit">Submit</string>
 </resources>

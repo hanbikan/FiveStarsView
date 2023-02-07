@@ -6,6 +6,5 @@ import kotlinx.coroutines.flow.StateFlow
 
 class ReviewViewModel: ViewModel() {
 
-    private val _average = MutableStateFlow(4.7f)
-    val average: StateFlow<Float> = _average
+    var starRating = MutableStateFlow(4.0f)
 }
