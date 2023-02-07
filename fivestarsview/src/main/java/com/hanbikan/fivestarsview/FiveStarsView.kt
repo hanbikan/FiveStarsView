@@ -25,10 +25,10 @@ class FiveStarsView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : FrameLayout(context, attrs, defStyle) {
 
-    private var starRating = 0.0f
     private var starSize = DEFAULT
-    private var starColor = DEFAULT
     private var starMargin = 0
+    private var starColor = DEFAULT
+    private var starRating = 0.0f
     private var changeable = true
     private var filledStarDrawable: Drawable? = null
     private var outlineStarDrawable: Drawable? = null
@@ -72,7 +72,7 @@ class FiveStarsView @JvmOverloads constructor(
             }
         }
 
-        onChangeStarRatingListeners.forEach { it.onChange() }
+        onChangeStarRatingListeners.forEach { it.onChange(newStarRating) }
     }
 
     fun getStarSize() = starSize
@@ -164,6 +164,16 @@ class FiveStarsView @JvmOverloads constructor(
         onChangeStarRatingListeners.add(listener)
     }
 
+    fun addOnChangeStarRatingListener(listener: (Float) -> Unit) {
+        onChangeStarRatingListeners.add(
+            object : OnChangeStarRatingListener {
+                override fun onChange(starRating: Float) {
+                    listener(starRating)
+                }
+            }
+        )
+    }
+
 
     private fun getAttrs(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.FiveStarsView)
@@ -175,10 +185,10 @@ class FiveStarsView @JvmOverloads constructor(
     }
 
     private fun setTypeArray(a: TypedArray) {
-        setStarRating(a.getFloat(R.styleable.FiveStarsView_fiveStarsView_starRating, starRating))
         setStarSize(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starSize, starSize))
-        setStarColor(a.getColor(R.styleable.FiveStarsView_fiveStarsView_starColor, starColor))
         setStarMargin(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starMargin, starMargin))
+        setStarColor(a.getColor(R.styleable.FiveStarsView_fiveStarsView_starColor, starColor))
+        setStarRating(a.getFloat(R.styleable.FiveStarsView_fiveStarsView_starRating, starRating))
         setChangeable(a.getBoolean(R.styleable.FiveStarsView_fiveStarsView_changeable, changeable))
         setFilledStarDrawable(a.getDrawable(R.styleable.FiveStarsView_fiveStarsView_filledStarDrawable))
         setOutlineStarDrawable(a.getDrawable(R.styleable.FiveStarsView_fiveStarsView_outlineStarDrawable))
@@ -201,6 +211,6 @@ class FiveStarsView @JvmOverloads constructor(
         /**
          * Called when [starRating] changes.
          */
-        fun onChange()
+        fun onChange(starRating: Float)
     }
 }
