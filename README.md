@@ -26,13 +26,13 @@ A basic example of implementing `FiveStarsView` is below.
   android:id="@+id/five_stars_view"
   android:layout_width="250dp"
   android:layout_height="70dp"
-  app:fiveStarsView_filledStarDrawable="@drawable/ic_baseline_star_24" // the drawable of the filled star.
-  app:fiveStarsView_outlineStarDrawable="@drawable/ic_baseline_star_outline_24" // the drawable of the outline star.
   app:fiveStarsView_starSize="100dp" // the size of the stars.
   app:fiveStarsView_starMargin="10dp" // the margin between each stars.
   app:fiveStarsView_starColor="@color/yellow" // the color of the stars.
   app:fiveStarsView_starRating="5" // star rating value.(float)
   app:fiveStarsView_changeable="true" // enables touch to change the star rating.
+  app:fiveStarsView_filledStarDrawable="@drawable/ic_baseline_star_24" // the drawable of the filled star.
+  app:fiveStarsView_outlineStarDrawable="@drawable/ic_baseline_star_outline_24" // the drawable of the outline star.
 />
 ```
 
@@ -47,6 +47,16 @@ fiveStarsView.getStarRating()
 fiveStarsView.setStarRating(5.0f)
 ```
 
+#### Two-way Data Binding
+You can also apply the two-way data binding with the `fiveStarsView_starRating` attribute.
+```gradle
+<com.hanbikan.fivestarsview.FiveStarsView
+  android:id="@+id/five_stars_view"
+  ..
+  app:fiveStarsView_starRating="@={vm.starRating}"
+/>
+```
+
 ### OnChangeStarRatingListener
 `OnChangeStarRatingListener` is called when the `starRating` changes.
 ```kotlin
@@ -56,6 +66,17 @@ fiveStarsView.addOnChangeStarRatingListener(object : FiveStarsView.OnChangeStarR
     }
 })
 ```
+
+## FiveStarsView Attributes
+|Attributes|Type|Default|Description|
+|---|---|---|---|
+|fiveStarsView_starSize|dimension|24dp|the size of the stars.|
+|fiveStarsView_starMargin|dimension|0dp|the margin between each stars.|
+|fiveStarsView_starColor|color|#F1C40f|the color of the stars.|
+|fiveStarsView_starRating|float|0.0f|star rating value.|
+|fiveStarsView_changeable|boolean|true|enables touch to change the star rating.|
+|fiveStarsView_filledStarDrawable|reference|ic_baseline_star_24|the drawable of the filled star.|
+|fiveStarsView_outlineStarDrawable|reference|ic_baseline_star_outline_24|the drawable of the outline star.|
 
 # License
 ```
