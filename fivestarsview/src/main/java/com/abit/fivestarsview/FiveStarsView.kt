@@ -130,7 +130,7 @@ class FiveStarsView @JvmOverloads constructor(
             outlineLayout.setOnTouchListener { v, event ->
                 when (event.action) {
                     MotionEvent.ACTION_MOVE -> {
-                        setStarRating(calculateStarRating(event.rawX))
+                        setStarRating(calculateStarRating(event.x))
                     }
                 }
                 true
@@ -184,12 +184,12 @@ class FiveStarsView @JvmOverloads constructor(
         setOutlineStarDrawable(a.getDrawable(R.styleable.FiveStarsView_fiveStarsView_outlineStarDrawable))
     }
 
-    private fun calculateStarRating(rawX: Float): Float {
-        return if (rawX < outlineStars[0].midX()) 0f
-        else if (rawX < outlineStars[1].midX()) 1f
-        else if (rawX < outlineStars[2].midX()) 2f
-        else if (rawX < outlineStars[3].midX()) 3f
-        else if (rawX < outlineStars[4].midX()) 4f
+    private fun calculateStarRating(x: Float): Float {
+        return if (x < outlineStars[0].midX()) 0f
+        else if (x < outlineStars[1].midX()) 1f
+        else if (x < outlineStars[2].midX()) 2f
+        else if (x < outlineStars[3].midX()) 3f
+        else if (x < outlineStars[4].midX()) 4f
         else 5f
     }
 
