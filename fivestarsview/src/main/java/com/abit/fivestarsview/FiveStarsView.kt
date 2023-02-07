@@ -180,8 +180,8 @@ class FiveStarsView @JvmOverloads constructor(
         setStarColor(a.getColor(R.styleable.FiveStarsView_fiveStarsView_starColor, starColor))
         setStarMargin(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starMargin, starMargin))
         setChangeable(a.getBoolean(R.styleable.FiveStarsView_fiveStarsView_changeable, changeable))
-        setFilledStarDrawable(a.getDrawable(R.styleable.FiveStarsView_fiveStarsView_filledStar))
-        setOutlineStarDrawable(a.getDrawable(R.styleable.FiveStarsView_fiveStarsView_outlineStar))
+        setFilledStarDrawable(a.getDrawable(R.styleable.FiveStarsView_fiveStarsView_filledStarDrawable))
+        setOutlineStarDrawable(a.getDrawable(R.styleable.FiveStarsView_fiveStarsView_outlineStarDrawable))
     }
 
     private fun calculateStarRating(rawX: Float): Float {
