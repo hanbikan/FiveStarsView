@@ -1,11 +1,14 @@
 package com.hanbikan.fivestarsviewdemo.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.hanbikan.fivestarsviewdemo.databinding.FragmentReviewBinding
+
+private const val TAG = "ReviewFragment"
 
 class ReviewFragment : Fragment() {
 
@@ -17,6 +20,9 @@ class ReviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentReviewBinding.inflate(inflater, container, false)
+        binding.fiveStarsView.addOnChangeStarRatingListener {
+            Log.d(TAG, it.toString())
+        }
 
         return binding.root
     }

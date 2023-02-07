@@ -72,7 +72,7 @@ class FiveStarsView @JvmOverloads constructor(
             }
         }
 
-        onChangeStarRatingListeners.forEach { it.onChange() }
+        onChangeStarRatingListeners.forEach { it.onChange(newStarRating) }
     }
 
     fun getStarSize() = starSize
@@ -164,6 +164,16 @@ class FiveStarsView @JvmOverloads constructor(
         onChangeStarRatingListeners.add(listener)
     }
 
+    fun addOnChangeStarRatingListener(listener: (Float) -> Unit) {
+        onChangeStarRatingListeners.add(
+            object : OnChangeStarRatingListener {
+                override fun onChange(starRating: Float) {
+                    listener(starRating)
+                }
+            }
+        )
+    }
+
 
     private fun getAttrs(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.FiveStarsView)
@@ -201,6 +211,6 @@ class FiveStarsView @JvmOverloads constructor(
         /**
          * Called when [starRating] changes.
          */
-        fun onChange()
+        fun onChange(starRating: Float)
     }
 }
