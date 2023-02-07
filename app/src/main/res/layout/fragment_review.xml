@@ -40,7 +40,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:fiveStarsView_changeable="true"
             app:fiveStarsView_starColor="@color/yellow"
-            app:starRating="@={vm.starRating}"
+            app:fiveStarsView_starRating="@={vm.starRating}"
             />
 
         <TextView
