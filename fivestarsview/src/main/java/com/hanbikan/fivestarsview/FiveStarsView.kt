@@ -1,4 +1,4 @@
-package com.abit.fivestarsview
+package com.hanbikan.fivestarsview
 
 import android.annotation.SuppressLint
 import android.content.Context

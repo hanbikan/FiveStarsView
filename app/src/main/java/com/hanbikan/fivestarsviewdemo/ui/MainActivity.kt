@@ -1,8 +1,8 @@
-package com.abit.fivestarsviewdemo.ui
+package com.hanbikan.fivestarsviewdemo.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.abit.fivestarsviewdemo.R
+import com.hanbikan.fivestarsviewdemo.R
 
 class MainActivity : AppCompatActivity() {
 

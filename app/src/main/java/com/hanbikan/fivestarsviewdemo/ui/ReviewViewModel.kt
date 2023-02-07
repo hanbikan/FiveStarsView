@@ -1,4 +1,4 @@
-package com.abit.fivestarsviewdemo.ui
+package com.hanbikan.fivestarsviewdemo.ui
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

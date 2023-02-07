@@ -13,7 +13,7 @@
         android:theme="@style/Theme.FiveStarsView"
         tools:targetApi="31">
         <activity
-            android:name="com.abit.fivestarsviewdemo.ui.MainActivity"
+            android:name="com.hanbikan.fivestarsviewdemo.ui.MainActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="true">
             <intent-filter>

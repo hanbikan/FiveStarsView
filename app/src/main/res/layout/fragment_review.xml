@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.abit.fivestarsviewdemo.ui.ReviewFragment">
+        tools:context="com.hanbikan.fivestarsviewdemo.ui.ReviewFragment">
 
         <TextView
             android:id="@+id/text_title"
@@ -24,7 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             />
 
-        <com.abit.fivestarsview.FiveStarsView
+        <com.hanbikan.fivestarsview.FiveStarsView
             android:id="@+id/five_stars_view"
             android:layout_width="250dp"
             android:layout_height="70dp"

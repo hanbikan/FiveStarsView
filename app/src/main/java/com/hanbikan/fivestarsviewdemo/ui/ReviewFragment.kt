@@ -1,11 +1,11 @@
-package com.abit.fivestarsviewdemo.ui
+package com.hanbikan.fivestarsviewdemo.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.abit.fivestarsviewdemo.databinding.FragmentReviewBinding
+import com.hanbikan.fivestarsviewdemo.databinding.FragmentReviewBinding
 
 class ReviewFragment : Fragment() {
 

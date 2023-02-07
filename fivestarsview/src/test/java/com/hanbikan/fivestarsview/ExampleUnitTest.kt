@@ -1,4 +1,4 @@
-package com.abit.fivestarsview
+package com.hanbikan.fivestarsview
 
 import org.junit.Test
 
