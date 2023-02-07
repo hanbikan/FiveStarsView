@@ -25,10 +25,10 @@ class FiveStarsView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : FrameLayout(context, attrs, defStyle) {
 
-    private var starRating = 0.0f
     private var starSize = DEFAULT
-    private var starColor = DEFAULT
     private var starMargin = 0
+    private var starColor = DEFAULT
+    private var starRating = 0.0f
     private var changeable = true
     private var filledStarDrawable: Drawable? = null
     private var outlineStarDrawable: Drawable? = null
@@ -185,10 +185,10 @@ class FiveStarsView @JvmOverloads constructor(
     }
 
     private fun setTypeArray(a: TypedArray) {
-        setStarRating(a.getFloat(R.styleable.FiveStarsView_fiveStarsView_starRating, starRating))
         setStarSize(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starSize, starSize))
-        setStarColor(a.getColor(R.styleable.FiveStarsView_fiveStarsView_starColor, starColor))
         setStarMargin(a.getDimensionPixelSize(R.styleable.FiveStarsView_fiveStarsView_starMargin, starMargin))
+        setStarColor(a.getColor(R.styleable.FiveStarsView_fiveStarsView_starColor, starColor))
+        setStarRating(a.getFloat(R.styleable.FiveStarsView_fiveStarsView_starRating, starRating))
         setChangeable(a.getBoolean(R.styleable.FiveStarsView_fiveStarsView_changeable, changeable))
         setFilledStarDrawable(a.getDrawable(R.styleable.FiveStarsView_fiveStarsView_filledStarDrawable))
         setOutlineStarDrawable(a.getDrawable(R.styleable.FiveStarsView_fiveStarsView_outlineStarDrawable))
