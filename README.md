@@ -9,15 +9,17 @@
 <p align="center">⭐️ A simple and flexible FiveStarsView, with customizable star images, color, size, and the like.</p>
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/58168528/217256711-3511c0a6-f099-4058-99ee-70bb4379f17c.gif" width="300px"/>
+  <img src="https://user-images.githubusercontent.com/58168528/217256711-3511c0a6-f099-4058-99ee-70bb4379f17c.gif" height="500px"/>
+  <img src="https://user-images.githubusercontent.com/58168528/217521907-dd924583-a85d-40ad-97d9-9cc047f12b89.gif" height="500px"/>
 </p>
+
 
 ## Including in your project
 ### Gradle
 Add the dependency below to your module's build.gradle file.
 ```gradle
 dependencies {
-  implementation "io.github.hanbikan:fivestarsview:1.0.0"
+    implementation "io.github.hanbikan:fivestarsview:1.0.0"
 }
 ```
 
@@ -31,16 +33,16 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 A basic example of implementing `FiveStarsView` is below.
 ```gradle
 <com.hanbikan.fivestarsview.FiveStarsView
-  android:id="@+id/five_stars_view"
-  android:layout_width="250dp"
-  android:layout_height="70dp"
-  app:fiveStarsView_starSize="100dp" // the size of the stars.
-  app:fiveStarsView_starMargin="10dp" // the margin between each stars.
-  app:fiveStarsView_starColor="@color/yellow" // the color of the stars.
-  app:fiveStarsView_starRating="5" // star rating value.(float)
-  app:fiveStarsView_changeable="true" // enables touch to change the star rating.
-  app:fiveStarsView_filledStarDrawable="@drawable/ic_baseline_star_24" // the drawable of the filled star.
-  app:fiveStarsView_outlineStarDrawable="@drawable/ic_baseline_star_outline_24" // the drawable of the outline star.
+    android:id="@+id/five_stars_view"
+    android:layout_width="250dp"
+    android:layout_height="70dp"
+    app:fiveStarsView_starSize="100dp" // the size of the stars.
+    app:fiveStarsView_starMargin="10dp" // the margin between each stars.
+    app:fiveStarsView_starColor="@color/yellow" // the color of the stars.
+    app:fiveStarsView_starRating="5" // star rating value.(float)
+    app:fiveStarsView_changeable="true" // enables touch to change the star rating.
+    app:fiveStarsView_filledStarDrawable="@drawable/ic_baseline_star_24" // the drawable of the filled star.
+    app:fiveStarsView_outlineStarDrawable="@drawable/ic_baseline_star_outline_24" // the drawable of the outline star.
 />
 ```
 
@@ -59,9 +61,9 @@ fiveStarsView.setStarRating(5.0f)
 You can also apply the two-way data binding with the `fiveStarsView_starRating` attribute.
 ```gradle
 <com.hanbikan.fivestarsview.FiveStarsView
-  android:id="@+id/five_stars_view"
-  ..
-  app:fiveStarsView_starRating="@={vm.starRating}"
+    android:id="@+id/five_stars_view"
+    ..
+    app:fiveStarsView_starRating="@={vm.starRating}"
 />
 ```
 
