@@ -3,6 +3,11 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 apply plugin: 'kotlin-kapt'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
     compileSdk 33
@@ -10,6 +15,8 @@ android {
     defaultConfig {
         minSdk 23
         targetSdk 33
+        versionCode 1
+        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -35,11 +42,72 @@ android {
 }
 
 dependencies {
-
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+}
+
+group = "io.github.hanbikan"
+version = "1.0.0"
+
+afterEvaluate {
+    publishing {
+        repositories {
+            maven {
+                name = "sonatype"
+                setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+                credentials {
+                    username = properties.getProperty("ossrhUsername")
+                    password = properties.getProperty("ossrhPassword")
+                }
+            }
+        }
+
+        publications {
+            maven(MavenPublication) {
+                artifactId "fivestarsview"
+                groupId group
+                version version
+
+                artifact("$buildDir/outputs/aar/${artifactId}-release.aar")
+
+                pom {
+                    name.set(artifactId)
+                    description.set("A simple and flexible FiveStarsView, with customizable star images, color, size, and the like.")
+                    url.set(groupId)
+
+                    licenses {
+                        license {
+                            name.set("The Apache License, Version 2.0")
+                            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                        }
+                    }
+                    developers {
+                        developer {
+                            id.set("hanbikan")
+                            name.set("hanbikan")
+                            email.set("fchopinof99@gmail.com")
+                        }
+                    }
+                    scm {
+                        url.set(groupId)
+                    }
+                }
+            }
+        }
+    }
+
+    // Signing artifacts. Signing.* extra properties values will be used
+    signing {
+        useInMemoryPgpKeys(
+                properties.getProperty("signing.keyId"),
+                properties.getProperty("signing.key"),
+                properties.getProperty("signing.password"),
+        )
+        sign(publishing.publications)
+    }
 }
