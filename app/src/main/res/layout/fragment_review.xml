@@ -38,8 +38,10 @@
             app:layout_constraintBottom_toTopOf="@id/text_star_rating"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:fiveStarsView_outlineStarDrawable="@drawable/ic_baseline_favorite_border_24"
+            app:fiveStarsView_filledStarDrawable="@drawable/ic_baseline_favorite_24"
             app:fiveStarsView_changeable="true"
-            app:fiveStarsView_starColor="@color/yellow"
+            app:fiveStarsView_starColor="@color/red"
             app:fiveStarsView_starRating="@={vm.starRating}"
             />
 
