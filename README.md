@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/License-Apache%202.0-brightgreen"/>
   <img src="https://img.shields.io/badge/API-23%2B-green"/>
-  <img src="https://img.shields.io/badge/GitHub-Hanbit--Kang-blue"/>
+  <img src="https://img.shields.io/badge/Github-hanbikan-blue"/>
 </p>
 
 <p align="center">⭐️ A simple and flexible FiveStarsView, with customizable star images, color, size, and the like.</p>
@@ -12,6 +12,14 @@
   <img src="https://user-images.githubusercontent.com/58168528/217256711-3511c0a6-f099-4058-99ee-70bb4379f17c.gif" width="300px"/>
 </p>
 
+## Including in your project
+### Gradle
+Add the dependency below to your module's build.gradle file.
+```gradle
+dependencies {
+  implementation "io.github.hanbikan:fivestarsview:1.0.0"
+}
+```
 
 ## Usage
 Add following XML namespace inside your XML layout file.
