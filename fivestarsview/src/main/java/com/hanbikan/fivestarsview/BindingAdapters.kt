@@ -9,18 +9,7 @@ fun setStarRating(view: FiveStarsView, starRating: Float) {
     view.setStarRating(starRating)
 }
 
-@InverseBindingAdapter(attribute = "fiveStarsView_starRating", event = "starRatingChanged")
+@InverseBindingAdapter(attribute = "fiveStarsView_starRating")
 fun getStarRating(view: FiveStarsView): Float {
     return view.getStarRating()
-}
-
-@BindingAdapter("starRatingChanged")
-fun setStarRatingInverseBindingListener(view: FiveStarsView, listener: InverseBindingListener) {
-    view.addOnChangeStarRatingListener(
-        object: FiveStarsView.OnChangeStarRatingListener {
-            override fun onChange(starRating: Float) {
-                listener.onChange()
-            }
-        }
-    )
 }
